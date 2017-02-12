@@ -16,12 +16,12 @@ def loginview(request):
 		reponse_data['new-user'] = '0'
 		return JsonResponse(response_data)
 	except MyUser.DoesNotExist:
-		name = MyUser.objects.create(uid=input['uid'],username=input['username'],email=input['email'],phone=input['phone'],gender=input['gender'],age=input['age'],city=input['city'])
-		name.save()
+		MyUser.objects.create(uid=input['uid'],username=input['username'],email=input['email'],phone=input['phone'],gender=input['gender'],age=input['age'],city=input['city'])
 		response_data['success'] = '1'
 		response_data['new-user'] = '0'
 		return JsonResponse(response_data)
 
+@csrf_exempt
 @require_POST
 def update_details(request):
 	response_data={}

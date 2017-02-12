@@ -6,7 +6,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 # Create your models here.
 #User Login done with facebook
 class MyUser(models.Model):
-	CITY_CHOICES = (('1','C1'),('2','C1'),('3','C1'))
+	CITY_CHOICES = (('1','C1'),('2','C2'),('3','C3'))
 	GENDER_CHOICES = (('M','Male'),('F','Female'),('O','Other'))
 	uid = models.CharField(max_length=40,null=True,blank=True)
 	age = models.IntegerField(default=18,null=True,blank=True)
@@ -18,4 +18,8 @@ class MyUser(models.Model):
 	phone = PhoneNumberField(unique=True,null=True,blank=True,help_text=('Only Indian'))
 
 	def __unicode__(self):
-		return self.name
+		return self.username
+
+	def get_default(self):
+		DEFAULT_UNAME = self.objects.first()
+		return DEFAULT_UNAME
