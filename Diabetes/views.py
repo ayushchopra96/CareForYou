@@ -17,8 +17,20 @@ def request_test(request):
 @require_POST
 def detect_diabetes(request):
 	input = request.POST
-
-
+	input_data = []
+	input_data.append(input['pregencies'])
+	input_data.append(input['glucose'])
+	input_data.append(input['bloodpressure'])
+	input_data.append(input['skin_thickness'])
+	input_data.append(input['insulin'])
+	input_data.append(input['bmi'])
+	input_data.append(input['diabetes_function'])
+	input_data.append(input['age'])
+	ans = predict_result([input_data])
+	ans = int(ans)
+	response_data = {}
+	response_data["result"] = ans
+	return response_data
 
 model = SVC(kernel="linear", C=0.1)
 
